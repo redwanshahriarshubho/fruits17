@@ -1,0 +1,31 @@
+.hero-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+  background-size: cover;
+  background-position: center;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.quantity-btn {
+  background: white;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  font-weight: bold;
+}
+
+.quantity-btn:hover {
+  background: #f3f4f6;
+}
+
+.active-nav {
+  color: #10B981;
+  border-bottom: 2px solid #10B981;
+}
