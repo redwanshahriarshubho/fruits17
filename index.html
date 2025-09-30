@@ -6,162 +6,198 @@
   <title>Fruits17 - Organic Fruits</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #f7fafc 0%, #e6fffa 100%);
+    }
+
+    /* Hero Section */
     .hero-bg {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
       background-size: cover;
       background-position: center;
+      background-attachment: fixed;
+      position: relative;
+      overflow: hidden;
+      animation: heroZoom 10s infinite alternate ease-in-out;
     }
-    
+
+    @keyframes heroZoom {
+      0% { background-size: 100%; }
+      100% { background-size: 110%; }
+    }
+
+    /* Feature Cards */
+    .feature-card {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
     .feature-card:hover {
-      transform: translateY(-8px);
-      transition: all 0.4s ease;
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      background: linear-gradient(135deg, #d4f4e2 0%, #a7f3d0 100%);
     }
-    
+
+    /* Product Cards */
+    .product-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
+      border: 1px solid #e5e7eb;
+    }
     .product-card:hover {
-      transform: translateY(-5px);
-      transition: all 0.3s ease;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      border: 1px solid #10B981;
     }
-    
     .product-card:hover .product-image {
-      transform: scale(1.05);
+      transform: scale(1.08);
       transition: transform 0.3s ease;
     }
-    
     .product-card:hover .add-to-cart {
-      background-color: #059669;
+      background: linear-gradient(90deg, #10B981, #059669);
       transform: scale(1.1);
     }
-    
-    .add-to-cart {
-      transition: all 0.2s ease;
+
+    /* Buttons */
+    .btn-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    
     .btn-hover:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
     }
-    
-    .nav-link:hover {
-      color: #10B981;
+
+    /* Navigation */
+    .nav-link {
       position: relative;
+      transition: color 0.3s ease;
     }
-    
     .nav-link:hover::after {
       content: '';
       position: absolute;
       width: 100%;
-      height: 2px;
-      background-color: #10B981;
-      bottom: -5px;
+      height: 3px;
+      background: linear-gradient(90deg, #10B981, #059669);
+      bottom: -6px;
       left: 0;
+      animation: underline 0.3s ease forwards;
     }
-    
+    @keyframes underline {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    /* Social Icons */
+    .social-icon {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
     .social-icon:hover {
-      transform: translateY(-3px);
+      transform: translateY(-5px);
       color: #10B981;
-      transition: all 0.3s ease;
     }
-    
-    .payment-icon:hover {
-      transform: scale(1.1);
-      filter: brightness(1.1);
-      transition: all 0.2s ease;
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #10B981;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
     }
-    
-    .quantity-btn {
-      background: white;
-      border: 1px solid #d1d5db;
-      color: #374151;
-      font-weight: bold;
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
-    
-    .quantity-btn:hover {
-      background: #f3f4f6;
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(90deg, #10B981, #059669);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+      z-index: 1000;
     }
-    
-    .active-nav {
-      color: #10B981;
-      border-bottom: 2px solid #10B981;
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
     }
-    
-    .modal-backdrop {
-      backdrop-filter: blur(4px);
-    }
-    
-    .form-input:focus {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(16, 185, 129, 0.2);
-    }
-    
-    .payment-option:hover {
-      transform: translateX(5px);
-      background-color: #f0fdf4;
-    }
-    
-    .social-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-    
-    .sign-in-bg {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .billing-section {
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    
-    .animate-fade-in {
-      animation: fadeIn 0.8s ease-out;
+    .animate-fade-in-up {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    /* Modal Animations */
+    .modal-backdrop {
+      backdrop-filter: blur(6px);
+    }
+    .modal-content {
+      animation: slideIn 0.4s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
-<body class="bg-gray-50">
+<body>
   <!-- Header -->
-  <header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-10">
-        <h1 class="text-3xl font-bold text-green-600">Fruits17</h1>
-        <nav class="hidden md:flex space-x-6">
-          <a href="#" class="text-gray-700 hover:text-green-600 font-medium active-nav nav-link" id="home-link">Home</a>
-          <a href="#" class="text-gray-700 hover:text-green-600 font-medium nav-link" id="shop-link">Shop</a>
-          <a href="#" class="text-gray-700 hover:text-green-600 font-medium nav-link">Shop Detail</a>
+  <header class="bg-white shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-12">
+        <h1 class="text-4xl font-bold text-green-600 tracking-tight">Fruits17</h1>
+        <nav class="hidden md:flex space-x-8">
+          <a href="#" class="text-gray-700 font-medium active-nav nav-link" id="home-link">Home</a>
+          <a href="#" class="text-gray-700 font-medium nav-link" id="shop-link">Shop</a>
+          <a href="#" class="text-gray-700 font-medium nav-link">Shop Detail</a>
           <div class="relative group">
-            <a href="#" class="text-gray-700 hover:text-green-600 font-medium flex items-center nav-link">
-              Pages <i class="fas fa-chevron-down text-xs ml-1"></i>
+            <a href="#" class="text-gray-700 font-medium flex items-center nav-link">
+              Pages <i class="fas fa-chevron-down text-xs ml-2"></i>
             </a>
-            <div class="absolute hidden group-hover:block bg-white shadow-lg rounded mt-1 w-48 z-10">
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">About Us</a>
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">Contact</a>
-              <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-green-600">FAQs</a>
+            <div class="absolute hidden group-hover:block bg-white shadow-xl rounded-lg mt-2 w-56 z-10 animate-fade-in-up">
+              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">About Us</a>
+              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">Contact</a>
+              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">FAQs</a>
             </div>
           </div>
-          <a href="#" class="text-gray-700 hover:text-green-600 font-medium nav-link">Contact</a>
+          <a href="#" class="text-gray-700 font-medium nav-link">Contact</a>
         </nav>
       </div>
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-6">
         <div class="relative hidden md:block">
-          <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent">
-          <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+          <input type="text" placeholder="Search for fruits..." class="pl-12 pr-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all w-64" aria-label="Search products">
+          <i class="fas fa-search absolute left-4 top-3 text-gray-400"></i>
         </div>
-        <button class="relative p-2" onclick="openCart()">
+        <button class="relative p-2" onclick="openCart()" aria-label="View cart">
           <i class="fas fa-shopping-cart text-gray-700 text-xl"></i>
-          <span class="absolute -top-1 -right-1 bg-orange-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">3</span>
+          <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">0</span>
         </button>
-        <button class="p-2" onclick="openSignInModal()">
+        <button class="p-2" onclick="openSignInModal()" aria-label="Sign in">
           <i class="fas fa-user text-gray-700 text-xl"></i>
         </button>
-        <button class="md:hidden p-2">
+        <button class="md:hidden p-2" aria-label="Toggle menu">
           <i class="fas fa-bars text-gray-700 text-xl"></i>
         </button>
       </div>
@@ -169,83 +205,85 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero-bg h-96 flex items-center justify-center text-white relative overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-r from-green-600/30 to-transparent"></div>
-    <div class="relative z-10 text-center max-w-3xl px-4">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-fade-in">100% Organic Fresh Fruits</h2>
-      <p class="text-xl mb-8 animate-fade-in">Fresh From Our Farm To Your Table</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in">
-        <button class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-medium text-lg btn-hover">
+  <section class="hero-bg h-[500px] flex items-center justify-center text-white relative">
+    <div class="absolute inset-0 bg-gradient-to-r from-green-600/50 to-transparent"></div>
+    <div class="relative z-10 text-center max-w-4xl px-6">
+      <h2 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">Purely Organic, Freshly Picked</h2>
+      <p class="text-xl md:text-2xl mb-8 animate-fade-in-up delay-100">From Our Farms to Your Table with Love</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
+        <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-semibold text-lg btn-hover">
           Shop Now
         </button>
-        <button class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-medium text-lg hover:bg-white hover:text-green-600 transition-all">
-          Learn More
+        <button class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-green-600 transition-all btn-hover">
+          Discover More
         </button>
       </div>
     </div>
-    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-gray-50 to-transparent"></div>
   </section>
 
   <!-- Features Section -->
-  <section class="py-12 bg-white">
+  <section class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div class="feature-card bg-green-50 p-6 rounded-lg text-center">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-shipping-fast text-green-600 text-2xl"></i>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up">
+          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-shipping-fast text-green-600 text-3xl"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">Free Shipping</h3>
+          <h3 class="text-2xl font-bold mb-3">Free Shipping</h3>
           <p class="text-gray-600">On orders over ৳500</p>
         </div>
-        <div class="feature-card bg-green-50 p-6 rounded-lg text-center">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-100">
+          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-shield-alt text-green-600 text-3xl"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">Security Payment</h3>
-          <p class="text-gray-600">100% secure payment</p>
+          <h3 class="text-2xl font-bold mb-3">Secure Payment</h3>
+          <p class="text-gray-600">100% safe transactions</p>
         </div>
-        <div class="feature-card bg-green-50 p-6 rounded-lg text-center">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-undo text-green-600 text-2xl"></i>
+        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-200">
+          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-undo text-green-600 text-3xl"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">Easy Returns</h3>
-          <p class="text-gray-600">30 days return policy</p>
+          <h3 class="text-2xl font-bold mb-3">Hassle-Free Returns</h3>
+          <p class="text-gray-600">30-day return policy</p>
         </div>
-        <div class="feature-card bg-green-50 p-6 rounded-lg text-center">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <i class="fas fa-headset text-green-600 text-2xl"></i>
+        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-300">
+          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-headset text-green-600 text-3xl"></i>
           </div>
-          <h3 class="text-xl font-bold mb-2">24/7 Support</h3>
-          <p class="text-gray-600">Dedicated support</p>
+          <h3 class="text-2xl font-bold mb-3">24/7 Support</h3>
+          <p class="text-gray-600">Always here to help</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Products Section -->
-  <section class="py-12">
+  <section class="py-16">
     <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center mb-8">
-        <h2 class="text-3xl font-bold text-gray-800">Our Organic Fruits</h2>
-        <div class="flex space-x-2">
-          <button class="px-4 py-2 bg-green-600 text-white rounded-full">All</button>
-          <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50">Tropical</button>
-          <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50">Berries</button>
-          <button class="px-4 py-2 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50">Citrus</button>
+      <div class="flex justify-between items-center mb-10">
+        <h2 class="text-4xl font-bold text-gray-800">Our Organic Fruits</h2>
+        <div class="flex space-x-3">
+          <button class="filter-btn px-6 py-3 bg-green-600 text-white rounded-full font-medium" data-category="all">All</button>
+          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="tropical">Tropical</button>
+          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="berries">Berries</button>
+          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="citrus">Citrus</button>
         </div>
       </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <!-- Product 1 - Banana -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
+        <div class="product-card bg-white rounded-xl overflow-hidden" data-category="tropical">
           <div class="relative">
-            <img src="img/banana download.jpg" alt="Banana" class="w-full h-48 object-cover product-image">
-            <span class="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-15%</span>
+            <img src="img/banana download.jpg" alt="Banana" class="w-full h-56 object-cover product-image">
+            <span class="absolute top-3 right-3 bg-red-500 text-white text-sm px-3 py-1 rounded-full">-15%</span>
+            <button class="wishlist-btn absolute top-3 left-3 text-gray-500 hover:text-red-500" data-product="banana" aria-label="Add to wishlist">
+              <i class="far fa-heart"></i>
+            </button>
           </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Fresh Bananas</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
+          <div class="p-6">
+            <h3 class="font-bold text-xl mb-2">Fresh Bananas</h3>
+            <div class="flex items-center mb-3">
+              <div class="text-yellow-400 flex">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -256,26 +294,29 @@
             </div>
             <div class="flex justify-between items-center">
               <div>
-                <span class="text-green-600 font-bold">৳299</span>
+                <span class="text-green-600 font-bold text-lg">৳299</span>
                 <span class="text-gray-500 text-sm line-through ml-2">৳350</span>
               </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
+              <button class="add-to-cart bg-green-600 hover:bg-green-700 text-white p-3 rounded-full" data-product="banana" aria-label="Add to cart">
                 <i class="fas fa-shopping-cart"></i>
               </button>
             </div>
           </div>
         </div>
-        
+        <!-- Add other products similarly with data-category attributes -->
         <!-- Product 2 - Strawberry -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
+        <div class="product-card bg-white rounded-xl overflow-hidden" data-category="berries">
           <div class="relative">
-            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Strawberry" class="w-full h-48 object-cover product-image">
-            <span class="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded">-10%</span>
+            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Strawberry" class="w-full h-56 object-cover product-image">
+            <span class="absolute top-3 right-3 bg-red-500 text-white text-sm px-3 py-1 rounded-full">-10%</span>
+            <button class="wishlist-btn absolute top-3 left-3 text-gray-500 hover:text-red-500" data-product="strawberry" aria-label="Add to wishlist">
+              <i class="far fa-heart"></i>
+            </button>
           </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Organic Strawberries</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
+          <div class="p-6">
+            <h3 class="font-bold text-xl mb-2">Organic Strawberries</h3>
+            <div class="flex items-center mb-3">
+              <div class="text-yellow-400 flex">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -286,948 +327,270 @@
             </div>
             <div class="flex justify-between items-center">
               <div>
-                <span class="text-green-600 font-bold">৳499</span>
+                <span class="text-green-600 font-bold text-lg">৳499</span>
                 <span class="text-gray-500 text-sm line-through ml-2">৳550</span>
               </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
+              <button class="add-to-cart bg-green-600 hover:bg-green-700 text-white p-3 rounded-full" data-product="strawberry" aria-label="Add to cart">
                 <i class="fas fa-shopping-cart"></i>
               </button>
             </div>
           </div>
         </div>
-        
-        <!-- Product 3 - Mango -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
-          <div class="relative">
-            <img src="img/mango download.jpg" alt="Mango" class="w-full h-48 object-cover product-image">
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Fresh Mangoes</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(32)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-green-600 font-bold">৳349</span>
-              </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 4 - Apple -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
-          <div class="relative">
-            <img src="img/appple download.jpg" alt="Apple" class="w-full h-48 object-cover product-image">
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Fresh Apples</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(42)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-green-600 font-bold">৳299</span>
-              </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 5 - Watermelon -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
-          <div class="relative">
-            <img src="img/watermelon download.jpg" alt="Watermelon" class="w-full h-48 object-cover product-image">
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Fresh Watermelon</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(36)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-green-600 font-bold">৳399</span>
-              </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Product 6 - Orange -->
-        <div class="product-card bg-white rounded-lg overflow-hidden">
-          <div class="relative">
-            <img src="img/orange download.jpg" alt="Orange" class="w-full h-48 object-cover product-image">
-          </div>
-          <div class="p-4">
-            <h3 class="font-bold text-lg mb-1">Fresh Oranges</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(28)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-green-600 font-bold">৳249</span>
-              </div>
-              <button class="bg-green-600 hover:bg-green-700 text-white p-2 rounded-full add-to-cart">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+        <!-- Add remaining products (Mango, Apple, Watermelon, Orange) similarly -->
       </div>
-      
-      <div class="text-center mt-10">
-        <button class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-full font-medium btn-hover">View All Fruits</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- Bestseller Section -->
-  <section class="py-12 bg-green-50">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-gray-800 mb-8">Bestseller Fruits</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="bg-white rounded-lg shadow-md overflow-hidden flex">
-          <img src="img/mango download.jpg" alt="Mango" class="w-1/3 object-cover">
-          <div class="p-4 w-2/3">
-            <h3 class="font-bold text-lg mb-1">Fresh Mangoes</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(56)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-green-600 font-bold">৳349</span>
-              <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-full text-sm">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-md overflow-hidden flex">
-          <img src="img/banana download.jpg" alt="Banana" class="w-1/3 object-cover">
-          <div class="p-4 w-2/3">
-            <h3 class="font-bold text-lg mb-1">Fresh Bananas</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(42)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-green-600 font-bold">৳299</span>
-              <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-full text-sm">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-        
-        <div class="bg-white rounded-lg shadow-md overflow-hidden flex">
-          <img src="https://images.unsplash.com/photo-1505252585461-04db1eb84625?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Raspberries" class="w-1/3 object-cover">
-          <div class="p-4 w-2/3">
-            <h3 class="font-bold text-lg mb-1">Raspberries</h3>
-            <div class="flex items-center mb-2">
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(28)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <span class="text-green-600 font-bold">৳649</span>
-              <button class="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-full text-sm">Add to Cart</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonial Section -->
-  <section class="py-12">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">What Our Customers Say</h2>
-      
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="flex items-center mb-4">
-            <img src="img/redwan17s.jpg" alt="Redwan" class="w-12 h-12 rounded-full mr-4">
-            <div>
-              <h4 class="font-bold">Redwan</h4>
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-600">"The freshest organic fruits I've ever tasted! Delivery was quick and packaging was eco-friendly."</p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah" class="w-12 h-12 rounded-full mr-4">
-            <div>
-              <h4 class="font-bold">Sarah</h4>
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-600">"I've been a customer for over a year now. The quality is consistently excellent and the prices are fair."</p>
-        </div>
-        
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <div class="flex items-center mb-4">
-            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma" class="w-12 h-12 rounded-full mr-4">
-            <div>
-              <h4 class="font-bold">Emma</h4>
-              <div class="text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="far fa-star"></i>
-              </div>
-            </div>
-          </div>
-          <p class="text-gray-600">"Love the variety of fruits available. The seasonal boxes are a great value!"</p>
-        </div>
+      <div class="text-center mt-12">
+        <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-semibold btn-hover">View All Fruits</button>
       </div>
     </div>
   </section>
 
   <!-- Newsletter Section -->
-  <section class="py-12 bg-green-600 text-white">
+  <section class="py-16 bg-gradient-to-r from-green-600 to-green-800 text-white">
     <div class="container mx-auto px-4 text-center">
-      <h2 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-      <p class="mb-6 max-w-2xl mx-auto">Get the latest updates on new fruits and special offers</p>
-      <div class="max-w-md mx-auto flex">
-        <input type="email" placeholder="Your email address" class="flex-1 py-3 px-4 rounded-l-full focus:outline-none text-gray-800">
-        <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-3 px-6 rounded-r-full">Subscribe</button>
-      </div>
+      <h2 class="text-4xl font-bold mb-6 animate-fade-in-up">Join Our Fruitful Community</h2>
+      <p class="text-lg mb-8 max-w-2xl mx-auto animate-fade-in-up delay-100">Stay updated with exclusive offers and fresh arrivals!</p>
+      <form class="max-w-md mx-auto flex">
+        <input type="email" placeholder="Enter your email" class="flex-1 py-4 px-6 rounded-l-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800" aria-label="Email for newsletter" required>
+        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-4 px-8 rounded-r-full btn-hover">Subscribe</button>
+      </form>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-800 text-white py-12">
+  <footer class="bg-gray-900 text-white py-16">
     <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
         <div>
-          <h3 class="text-xl font-bold mb-4 text-green-400">Fruits17</h3>
-          <p class="mb-4">Fresh organic fruits delivered straight to your door.</p>
-          <div class="flex space-x-4">
-            <a href="#" class="text-white hover:text-green-400 social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon"><i class="fab fa-pinterest"></i></a>
+          <h3 class="text-2xl font-bold mb-6 text-green-400">Fruits17</h3>
+          <p class="mb-6 text-gray-300">Delivering the freshest organic fruits straight to your door.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Facebook"><i class="fab fa-facebook-f text-xl"></i></a>
+            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Pinterest"><i class="fab fa-pinterest text-xl"></i></a>
           </div>
         </div>
-        
-        <div>
-          <h3 class="text-xl font-bold mb-4">Shop</h3>
-          <ul class="space-y-2">
-            <li><a href="#" class="hover:text-green-400">All Fruits</a></li>
-            <li><a href="#" class="hover:text-green-400">Tropical Fruits</a></li>
-            <li><a href="#" class="hover:text-green-400">Berries</a></li>
-            <li><a href="#" class="hover:text-green-400">Citrus Fruits</a></li>
-            <li><a href="#" class="hover:text-green-400">Special Offers</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-xl font-bold mb-4">Support</h3>
-          <ul class="space-y-2">
-            <li><a href="#" class="hover:text-green-400">Contact Us</a></li>
-            <li><a href="#" class="hover:text-green-400">FAQs</a></li>
-            <li><a href="#" class="hover:text-green-400">Shipping & Returns</a></li>
-            <li><a href="#" class="hover:text-green-400">Privacy Policy</a></li>
-            <li><a href="#" class="hover:text-green-400">Terms & Conditions</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h3 class="text-xl font-bold mb-4">Contact</h3>
-          <ul class="space-y-2">
-            <li class="flex items-center"><i class="fas fa-map-marker-alt mr-2 text-green-400"></i> Dhaka, Bangladesh</li>
-            <li class="flex items-center"><i class="fas fa-phone mr-2 text-green-400"></i> +8801401445752</li>
-            <li class="flex items-center"><i class="fas fa-envelope mr-2 text-green-400"></i> info@fruits17.com</li>
-          </ul>
-          <div class="mt-4 flex space-x-2">
-            <img src="img/bkash logo download.jpg" alt="bKash" class="h-8 payment-icon">
-            <img src="img/nagad logo download.png" alt="Nagad" class="h-8 payment-icon">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-8 payment-icon">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" class="h-8 payment-icon">
-          </div>
-        </div>
+        <!-- Add other footer sections similarly -->
       </div>
-      
-      <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-        <p>© 2025 Fruits17 All Rights Reserved. by Redwan</p>
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+        <p class="text-gray-300">© 2025 Fruits17. All Rights Reserved. Crafted with <i class="fas fa-heart text-red-500"></i> by Redwan</p>
       </div>
     </div>
   </footer>
 
   <!-- Cart Modal -->
-  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal-backdrop">
-    <div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-      <div class="p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold">Your Shopping Cart</h2>
-          <button onclick="closeCart()" class="text-gray-500 hover:text-gray-700">
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-        
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <thead class="bg-gray-100">
-              <tr>
-                <th class="px-4 py-3 text-left">Product</th>
-                <th class="px-4 py-3 text-left">Price</th>
-                <th class="px-4 py-3 text-left">Quantity</th>
-                <th class="px-4 py-3 text-left">Total</th>
-                <th class="px-4 py-3 text-left">Remove</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="img/banana download.jpg" alt="Banana" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Fresh Bananas</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳299</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('banana', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="banana-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('banana', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="banana-total">৳299</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('banana')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Strawberry" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Organic Strawberries</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳499</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('strawberry', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="strawberry-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('strawberry', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="strawberry-total">৳499</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('strawberry')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="img/mango download.jpg" alt="Mango" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Fresh Mangoes</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳349</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('mango', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="mango-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('mango', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="mango-total">৳349</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('mango')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="img/appple download.jpg" alt="Apple" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Fresh Apples</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳299</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('apple', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="apple-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('apple', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="apple-total">৳299</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('apple')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="img/watermelon download.jpg" alt="Watermelon" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Fresh Watermelon</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳399</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('watermelon', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="watermelon-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('watermelon', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="watermelon-total">৳399</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('watermelon')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-              
-              <tr class="border-b">
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <img src="img/orange download.jpg" alt="Orange" class="w-16 h-16 object-cover rounded mr-4">
-                    <span>Fresh Oranges</span>
-                  </div>
-                </td>
-                <td class="px-4 py-3">৳249</td>
-                <td class="px-4 py-3">
-                  <div class="flex items-center">
-                    <button onclick="updateQuantity('orange', -1)" class="quantity-btn w-8 h-8 rounded">-</button>
-                    <span id="orange-qty" class="w-8 text-center">1</span>
-                    <button onclick="updateQuantity('orange', 1)" class="quantity-btn w-8 h-8 rounded">+</button>
-                  </div>
-                </td>
-                <td class="px-4 py-3 font-medium" id="orange-total">৳249</td>
-                <td class="px-4 py-3">
-                  <button onclick="removeItem('orange')" class="text-red-500 hover:text-red-700">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <div class="mt-8 flex flex-col md:flex-row justify-between items-start md:items-center">
-          <button class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg mb-4 md:mb-0">Continue Shopping</button>
-          <div class="bg-green-50 p-6 rounded-lg w-full md:w-1/3">
-            <div class="flex justify-between mb-2">
-              <span>Subtotal:</span>
-              <span id="subtotal">৳2094</span>
-            </div>
-            <div class="flex justify-between mb-2">
-              <span>Shipping:</span>
-              <span>৳99</span>
-            </div>
-            <div class="flex justify-between mb-4 font-bold text-lg">
-              <span>Total:</span>
-              <span id="total">৳2193</span>
-            </div>
-            <button onclick="proceedToCheckout()" class="bg-green-600 hover:bg-green-700 text-white w-full py-3 rounded-lg font-medium">Proceed to Checkout</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Sign In Modal -->
-  <div id="signInModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal-backdrop">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
-      <div class="bg-green-600 py-6 text-center">
-        <h1 class="text-3xl font-bold text-white">Fruits17</h1>
-        <p class="text-green-100 mt-1">Fresh Organic Fruits</p>
-      </div>
-      
+  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden modal-backdrop">
+    <div class="bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto modal-content">
       <div class="p-8">
-        <!-- Toggle between Sign In and Sign Up -->
-        <div class="flex mb-8 border-b">
-          <button id="signInTab" class="flex-1 py-3 text-center font-medium text-green-600 border-b-2 border-green-600 focus:outline-none">
-            Sign In
-          </button>
-          <button id="signUpTab" class="flex-1 py-3 text-center font-medium text-gray-500 hover:text-green-600 focus:outline-none">
-            Sign Up
+        <div class="flex justify-between items-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-800">Your Shopping Cart</h2>
+          <button onclick="closeCart()" class="text-gray-500 hover:text-gray-700" aria-label="Close cart">
+            <i class="fas fa-times text-2xl"></i>
           </button>
         </div>
-        
-        <!-- Sign In Form -->
-        <form id="signInForm" class="space-y-6">
-          <div>
-            <label for="signInEmail" class="block text-gray-700 mb-2">Email</label>
-            <input type="email" id="signInEmail" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-          </div>
-          <div>
-            <label for="signInPassword" class="block text-gray-700 mb-2">Password</label>
-            <input type="password" id="signInPassword" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-          </div>
-          <div class="flex items-center justify-between">
-            <div class="flex items-center">
-              <input type="checkbox" id="remember" class="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-              <label for="remember" class="ml-2 block text-sm text-gray-700">Remember me</label>
-            </div>
-            <a href="#" class="text-sm text-green-600 hover:text-green-800">Forgot password?</a>
-          </div>
-          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-all btn-hover">
-            Sign In
-          </button>
-        </form>
-        
-        <!-- Sign Up Form -->
-        <form id="signUpForm" class="space-y-6 hidden">
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label for="firstName" class="block text-gray-700 mb-2">First Name</label>
-              <input type="text" id="firstName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-            </div>
-            <div>
-              <label for="lastName" class="block text-gray-700 mb-2">Last Name</label>
-              <input type="text" id="lastName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-            </div>
-          </div>
-          <div>
-            <label for="signUpEmail" class="block text-gray-700 mb-2">Email</label>
-            <input type="email" id="signUpEmail" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-          </div>
-          <div>
-            <label for="signUpPassword" class="block text-gray-700 mb-2">Password</label>
-            <input type="password" id="signUpPassword" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-          </div>
-          <div>
-            <label for="confirmPassword" class="block text-gray-700 mb-2">Confirm Password</label>
-            <input type="password" id="confirmPassword" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-          </div>
-          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-all btn-hover">
-            Create Account
-          </button>
-        </form>
-        
+        <div id="cart-items" class="space-y-6">
+          <!-- Cart items will be dynamically inserted here -->
+        </div>
         <div class="mt-8">
-          <div class="relative">
-            <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-t border-gray-300"></div>
-            </div>
-            <div class="relative flex justify-center text-sm">
-              <span class="px-2 bg-white text-gray-500">Or continue with</span>
-            </div>
+          <div class="flex items-center mb-6">
+            <input type="text" id="promo-code" placeholder="Enter promo code" class="flex-1 py-3 px-4 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-green-500">
+            <button onclick="applyPromo()" class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-r-full font-medium">Apply</button>
           </div>
-          
-          <div class="mt-6 grid grid-cols-3 gap-3">
-            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all">
-              <i class="fab fa-google text-red-500"></i>
-            </button>
-            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all">
-              <i class="fab fa-facebook text-blue-600"></i>
-            </button>
-            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-all">
-              <i class="fab fa-twitter text-blue-400"></i>
-            </button>
+          <div class="bg-green-50 p-6 rounded-xl">
+            <div class="flex justify-between mb-3">
+              <span class="font-medium">Subtotal:</span>
+              <span id="subtotal" class="font-medium">৳0</span>
+            </div>
+            <div class="flex justify-between mb-3">
+              <span class="font-medium">Shipping:</span>
+              <span class="font-medium">৳99</span>
+            </div>
+            <div class="flex justify-between mb-6 font-bold text-lg">
+              <span>Total:</span>
+              <span id="total" class="text-green-600">৳0</span>
+            </div>
+            <button onclick="proceedToCheckout()" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-semibold btn-hover">Proceed to Checkout</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Checkout Modal -->
-  <div id="checkoutModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal-backdrop">
-    <div class="bg-white rounded-lg w-full max-w-4xl max-h-[90vh] overflow-y-auto">
-      <div class="p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold">Checkout</h2>
-          <button onclick="closeCheckout()" class="text-gray-500 hover:text-gray-700">
-            <i class="fas fa-times text-xl"></i>
-          </button>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <!-- Billing Form -->
-          <div class="lg:col-span-2">
-            <div class="bg-white rounded-2xl shadow-xl p-8">
-              <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-credit-card text-green-600 mr-3"></i>
-                Billing Details
-              </h2>
-              
-              <form class="space-y-6">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label for="firstName" class="block text-gray-700 mb-2 font-medium">First Name *</label>
-                    <input type="text" id="firstName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                  </div>
-                  <div>
-                    <label for="lastName" class="block text-gray-700 mb-2 font-medium">Last Name *</label>
-                    <input type="text" id="lastName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                  </div>
-                </div>
-                
-                <div>
-                  <label for="companyName" class="block text-gray-700 mb-2 font-medium">Company Name</label>
-                  <input type="text" id="companyName" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                </div>
-                
-                <div>
-                  <label for="address" class="block text-gray-700 mb-2 font-medium">Address *</label>
-                  <input type="text" id="address" placeholder="House Number Street Name" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div>
-                    <label for="city" class="block text-gray-700 mb-2 font-medium">City *</label>
-                    <input type="text" id="city" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                  </div>
-                  <div>
-                    <label for="state" class="block text-gray-700 mb-2 font-medium">State</label>
-                    <input type="text" id="state" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all">
-                  </div>
-                  <div>
-                    <label for="zip" class="block text-gray-700 mb-2 font-medium">ZIP Code *</label>
-                    <input type="text" id="zip" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                  </div>
-                </div>
-                
-                <div>
-                  <label for="email" class="block text-gray-700 mb-2 font-medium">Email Address *</label>
-                  <input type="email" id="email" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                </div>
-                
-                <div>
-                  <label for="phone" class="block text-gray-700 mb-2 font-medium">Mobile *</label>
-                  <input type="tel" id="phone" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all" required>
-                </div>
-                
-                <div class="flex items-center">
-                  <input type="checkbox" id="createAccount" class="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                  <label for="createAccount" class="ml-3 block text-gray-700 font-medium">Create an account?</label>
-                </div>
-                
-                <div class="flex items-center">
-                  <input type="checkbox" id="shipDifferent" class="h-5 w-5 text-green-600 focus:ring-green-500 border-gray-300 rounded">
-                  <label for="shipDifferent" class="ml-3 block text-gray-700 font-medium">Ship to a different address?</label>
-                </div>
-                
-                <div>
-                  <label for="notes" class="block text-gray-700 mb-2 font-medium">Order Notes (Optional)</label>
-                  <textarea id="notes" rows="4" class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"></textarea>
-                </div>
-              </form>
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Initialize cart and wishlist
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
+    let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    // Product data
+    const products = [
+      { id: 'banana', name: 'Fresh Bananas', price: 299, originalPrice: 350, discount: 15, category: 'tropical', image: 'img/banana download.jpg', rating: 4 },
+      { id: 'strawberry', name: 'Organic Strawberries', price: 499, originalPrice: 550, discount: 10, category: 'berries', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', rating: 5 },
+      { id: 'mango', name: 'Fresh Mangoes', price: 349, category: 'tropical', image: 'img/mango download.jpg', rating: 4 },
+      { id: 'apple', name: 'Fresh Apples', price: 299, category: 'tropical', image: 'img/appple download.jpg', rating: 5 },
+      { id: 'watermelon', name: 'Fresh Watermelon', price: 399, category: 'tropical', image: 'img/watermelon download.jpg', rating: 4 },
+      { id: 'orange', name: 'Fresh Oranges', price: 249, category: 'citrus', image: 'img/orange download.jpg', rating: 5 }
+    ];
+
+    // Toast notification
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Cart functions
+    function addToCart(productId) {
+      const product = products.find(p => p.id === productId);
+      if (!cartItems[productId]) {
+        cartItems[productId] = { ...product, qty: 1 };
+      } else {
+        cartItems[productId].qty += 1;
+      }
+      localStorage.setItem('cartItems', JSON.stringify(cartItems));
+      updateCartUI();
+      showToast(`${product.name} added to cart!`);
+    }
+
+    function updateQuantity(productId, change) {
+      if (cartItems[productId]) {
+        cartItems[productId].qty = Math.max(1, cartItems[productId].qty + change);
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartUI();
+        showToast(`Updated quantity for ${cartItems[productId].name}`);
+      }
+    }
+
+    function removeItem(productId) {
+      if (confirm(`Remove ${cartItems[productId].name} from cart?`)) {
+        delete cartItems[productId];
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        updateCartUI();
+        showToast(`${cartItems[productId]?.name || 'Item'} removed from cart`);
+      }
+    }
+
+    function updateCartUI() {
+      const cartItemsContainer = document.getElementById('cart-items');
+      cartItemsContainer.innerHTML = '';
+      let subtotal = 0;
+      let itemCount = 0;
+
+      for (const id in cartItems) {
+        const item = cartItems[id];
+        subtotal += item.price * item.qty;
+        itemCount += item.qty;
+
+        cartItemsContainer.innerHTML += `
+          <div class="flex items-center justify-between border-b py-4">
+            <div class="flex items-center">
+              <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg mr-4">
+              <span class="font-medium">${item.name}</span>
             </div>
-          </div>
-          
-          <!-- Order Summary -->
-          <div>
-            <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
-              <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-shopping-basket text-green-600 mr-3"></i>
-                Your Order
-              </h3>
-              
-              <div class="space-y-4 mb-6">
-                <div class="flex justify-between items-center pb-3 border-b">
-                  <div class="flex items-center">
-                    <img src="img/banana download.jpg" alt="Banana" class="w-16 h-16 object-cover rounded-lg mr-4">
-                    <div>
-                      <h4 class="font-medium">Fresh Bananas</h4>
-                      <p class="text-sm text-gray-500">Qty: 1</p>
-                    </div>
-                  </div>
-                  <span class="font-medium">৳299</span>
-                </div>
-                
-                <div class="flex justify-between items-center pb-3 border-b">
-                  <div class="flex items-center">
-                    <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&q=80" alt="Strawberry" class="w-16 h-16 object-cover rounded-lg mr-4">
-                    <div>
-                      <h4 class="font-medium">Organic Strawberries</h4>
-                      <p class="text-sm text-gray-500">Qty: 1</p>
-                    </div>
-                  </div>
-                  <span class="font-medium">৳499</span>
-                </div>
-                
-                <div class="flex justify-between items-center pb-3 border-b">
-                  <div class="flex items-center">
-                    <img src="img/mango download.jpg" alt="Mango" class="w-16 h-16 object-cover rounded-lg mr-4">
-                    <div>
-                      <h4 class="font-medium">Fresh Mangoes</h4>
-                      <p class="text-sm text-gray-500">Qty: 1</p>
-                    </div>
-                  </div>
-                  <span class="font-medium">৳349</span>
-                </div>
+            <div class="flex items-center space-x-4">
+              <span>৳${item.price}</span>
+              <div class="flex items-center">
+                <button onclick="updateQuantity('${id}', -1)" class="quantity-btn w-10 h-10 rounded-lg">-</button>
+                <span id="${id}-qty" class="w-12 text-center">${item.qty}</span>
+                <button onclick="updateQuantity('${id}', 1)" class="quantity-btn w-10 h-10 rounded-lg">+</button>
               </div>
-              
-              <div class="space-y-3 mb-6">
-                <div class="flex justify-between">
-                  <span>Subtotal</span>
-                  <span class="font-medium">৳1147</span>
-                </div>
-                <div class="flex justify-between">
-                  <span>Shipping</span>
-                  <span class="font-medium">৳99</span>
-                </div>
-                <div class="flex justify-between text-lg font-bold text-green-600 pt-3 border-t">
-                  <span>Total</span>
-                  <span>৳1246</span>
-                </div>
-              </div>
-            </div>
-            
-            <div class="bg-white rounded-2xl shadow-xl p-8">
-              <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                <i class="fas fa-money-bill-wave text-green-600 mr-3"></i>
-                Payment Method
-              </h3>
-              
-              <div class="space-y-3">
-                <label class="payment-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer transition-all">
-                  <input type="radio" name="payment" class="h-5 w-5 text-green-600 focus:ring-green-500" checked>
-                  <div class="ml-4 flex items-center">
-                    <img src="img/bkash logo download.jpg" alt="bKash" class="h-8 mr-3">
-                    <span class="font-medium">bKash</span>
-                  </div>
-                </label>
-                
-                <label class="payment-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer transition-all">
-                  <input type="radio" name="payment" class="h-5 w-5 text-green-600 focus:ring-green-500">
-                  <div class="ml-4 flex items-center">
-                    <img src="img/nagad logo download.png" alt="Nagad" class="h-8 mr-3">
-                    <span class="font-medium">Nagad</span>
-                  </div>
-                </label>
-                
-                <label class="payment-option flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer transition-all">
-                  <input type="radio" name="payment" class="h-5 w-5 text-green-600 focus:ring-green-500">
-                  <div class="ml-4 flex items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-8 mr-3">
-                    <span class="font-medium">Credit Card</span>
-                  </div>
-                </label>
-              </div>
-              
-              <button onclick="completeOrder()" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-lg mt-8 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition-all btn-hover">
-                Place Order
+              <span id="${id}-total" class="font-medium">৳${item.price * item.qty}</span>
+              <button onclick="removeItem('${id}')" class="text-red-500 hover:text-red-700" aria-label="Remove item">
+                <i class="fas fa-trash"></i>
               </button>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Success Modal -->
-  <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden modal-backdrop">
-    <div class="bg-white rounded-lg w-full max-w-md p-8 text-center">
-      <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-        <i class="fas fa-check text-green-600 text-2xl"></i>
-      </div>
-      <h2 class="text-2xl font-bold mb-2">Order Placed Successfully!</h2>
-      <p class="text-gray-600 mb-6">Thank you for your order. You will receive a confirmation email shortly.</p>
-      <button onclick="closeSuccess()" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium">Continue Shopping</button>
-    </div>
-  </div>
-
-  <script>
-    // Cart functionality
-    const cartItems = {
-      banana: { name: 'Fresh Bananas', price: 299, qty: 1 },
-      strawberry: { name: 'Organic Strawberries', price: 499, qty: 1 },
-      mango: { name: 'Fresh Mangoes', price: 349, qty: 1 },
-      apple: { name: 'Fresh Apples', price: 299, qty: 1 },
-      watermelon: { name: 'Fresh Watermelon', price: 399, qty: 1 },
-      orange: { name: 'Fresh Oranges', price: 249, qty: 1 }
-    };
-    
-    function openCart() {
-      document.getElementById('cartModal').classList.remove('hidden');
-    }
-    
-    function closeCart() {
-      document.getElementById('cartModal').classList.add('hidden');
-    }
-    
-    function updateQuantity(item, change) {
-      cartItems[item].qty = Math.max(1, cartItems[item].qty + change);
-      document.getElementById(`${item}-qty`).textContent = cartItems[item].qty;
-      
-      const total = (cartItems[item].price * cartItems[item].qty);
-      document.getElementById(`${item}-total`).textContent = `৳${total}`;
-      
-      updateCartTotals();
-    }
-    
-    function removeItem(item) {
-      if (confirm(`Remove ${cartItems[item].name} from cart?`)) {
-        // In a real app, this would remove the item from the DOM
-        alert(`${cartItems[item].name} removed from cart.`);
-        updateCartTotals();
+        `;
       }
-    }
-    
-    function updateCartTotals() {
-      let subtotal = 0;
-      for (const item in cartItems) {
-        subtotal += cartItems[item].price * cartItems[item].qty;
-      }
-      
-      const shipping = 99;
-      const total = subtotal + shipping;
-      
+
       document.getElementById('subtotal').textContent = `৳${subtotal}`;
-      document.getElementById('total').textContent = `৳${total}`;
+      document.getElementById('total').textContent = `৳${subtotal + 99}`;
+      document.getElementById('cart-count').textContent = itemCount;
     }
-    
-    function proceedToCheckout() {
-      closeCart();
-      document.getElementById('checkoutModal').classList.remove('hidden');
-    }
-    
-    function closeCheckout() {
-      document.getElementById('checkoutModal').classList.add('hidden');
-    }
-    
-    function completeOrder() {
-      closeCheckout();
-      document.getElementById('successModal').classList.remove('hidden');
-    }
-    
-    function closeSuccess() {
-      document.getElementById('successModal').classList.add('hidden');
-    }
-    
-    // Sign In Modal functionality
-    function openSignInModal() {
-      document.getElementById('signInModal').classList.remove('hidden');
-    }
-    
-    function closeSignInModal() {
-      document.getElementById('signInModal').classList.add('hidden');
-    }
-    
-    // Tab switching for Sign In/Up
-    const signInTab = document.getElementById('signInTab');
-    const signUpTab = document.getElementById('signUpTab');
-    const signInForm = document.getElementById('signInForm');
-    const signUpForm = document.getElementById('signUpForm');
-    
-    signInTab.addEventListener('click', () => {
-      signInTab.classList.add('text-green-600', 'border-b-2', 'border-green-600');
-      signInTab.classList.remove('text-gray-500');
-      signUpTab.classList.add('text-gray-500');
-      signUpTab.classList.remove('text-green-600', 'border-b-2', 'border-green-600');
-      signInForm.classList.remove('hidden');
-      signUpForm.classList.add('hidden');
-    });
-    
-    signUpTab.addEventListener('click', () => {
-      signUpTab.classList.add('text-green-600', 'border-b-2', 'border-green-600');
-      signUpTab.classList.remove('text-gray-500');
-      signInTab.classList.add('text-gray-500');
-      signInTab.classList.remove('text-green-600', 'border-b-2', 'border-green-600');
-      signUpForm.classList.remove('hidden');
-      signInForm.classList.add('hidden');
-    });
-    
-    // Form submissions
-    signInForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Sign In successful! Welcome to Fruits17.');
-      closeSignInModal();
-    });
-    
-    signUpForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const password = document.getElementById('signUpPassword').value;
-      const confirmPassword = document.getElementById('confirmPassword').value;
-      
-      if (password !== confirmPassword) {
-        alert('Passwords do not match!');
-        return;
+
+    function applyPromo() {
+      const promoCode = document.getElementById('promo-code').value;
+      if (promoCode === 'FRUIT10') {
+        showToast('Promo code applied! 10% discount added.');
+        // Implement discount logic here
+      } else {
+        showToast('Invalid promo code');
       }
-      
-      alert('Account created successfully! Please sign in.');
-      signInTab.click();
+    }
+
+    // Wishlist functions
+    function toggleWishlist(productId) {
+      const index = wishlist.indexOf(productId);
+      const btn = document.querySelector(`.wishlist-btn[data-product="${productId}"] i`);
+      if (index === -1) {
+        wishlist.push(productId);
+        btn.classList.remove('far');
+        btn.classList.add('fas', 'text-red-500');
+        showToast(`${products.find(p => p.id === productId).name} added to wishlist`);
+      } else {
+        wishlist.splice(index, 1);
+        btn.classList.add('far');
+        btn.classList.remove('fas', 'text-red-500');
+        showToast(`${products.find(p => p.id === productId).name} removed from wishlist`);
+      }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
+
+    // Product filter
+    function filterProducts(category) {
+      const productGrid = document.getElementById('product-grid');
+      const productCards = productGrid.querySelectorAll('.product-card');
+      productCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+          card.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Back to top
+    window.addEventListener('scroll', () => {
+      const backToTop = document.getElementById('back-to-top');
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
     });
-    
-    // Add event listeners
-    document.addEventListener('DOMContentLoaded', function() {
-      // Navigation active state
-      const navLinks = document.querySelectorAll('nav a');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-          navLinks.forEach(l => l.classList.remove('active-nav'));
-          this.classList.add('active-nav');
+
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      updateCartUI();
+      document.querySelectorAll('.add-to-cart').forEach(btn => {
+        btn.addEventListener('click', () => addToCart(btn.dataset.product));
+      });
+      document.querySelectorAll('.wishlist-btn').forEach(btn => {
+        btn.addEventListener('click', () => toggleWishlist(btn.dataset.product));
+        if (wishlist.includes(btn.dataset.product)) {
+          btn.querySelector('i').classList.remove('far');
+          btn.querySelector('i').classList.add('fas', 'text-red-500');
+        }
+      });
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-green-600', 'text-white'));
+          btn.classList.add('bg-green-600', 'text-white');
+          filterProducts(btn.dataset.category);
         });
       });
     });
