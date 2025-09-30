@@ -10,18 +10,23 @@
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #f7fafc 0%, #e6fffa 100%);
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #f3f4f6;
+    }
+
+    /* Header */
+    header {
+      background: #121212;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
 
     /* Hero Section */
     .hero-bg {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
-      position: relative;
-      overflow: hidden;
-      animation: heroZoom 10s infinite alternate ease-in-out;
+      animation: heroZoom 12s infinite alternate ease-in-out;
     }
 
     @keyframes heroZoom {
@@ -31,22 +36,24 @@
 
     /* Feature Cards */
     .feature-card {
+      background: #2d2d2d;
       transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .feature-card:hover {
       transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-      background: linear-gradient(135deg, #d4f4e2 0%, #a7f3d0 100%);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, #10B981, #059669);
     }
 
     /* Product Cards */
     .product-card {
+      background: #2d2d2d;
+      border: 1px solid #3f3f3f;
       transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease;
-      border: 1px solid #e5e7eb;
     }
     .product-card:hover {
       transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
       border: 1px solid #10B981;
     }
     .product-card:hover .product-image {
@@ -64,13 +71,17 @@
     }
     .btn-hover:hover {
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.6);
     }
 
     /* Navigation */
     .nav-link {
+      color: #f3f4f6;
       position: relative;
       transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: #10B981;
     }
     .nav-link:hover::after {
       content: '';
@@ -87,29 +98,54 @@
       to { width: 100%; }
     }
 
-    /* Social Icons */
-    .social-icon {
-      transition: transform 0.3s ease, color 0.3s ease;
+    /* Sign-In/Sign-Up Form */
+    .form-input {
+      background: #2d2d2d;
+      color: #f3f4f6;
+      border: 1px solid #4b4b4b;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     }
-    .social-icon:hover {
-      transform: translateY(-5px);
+    .form-input:hover {
+      border-color: #10B981;
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+    }
+    .form-input:focus {
+      transform: scale(1.02);
+      border-color: #10B981;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.5);
+      outline: none;
+    }
+
+    .form-tab {
+      transition: all 0.3s ease;
+    }
+    .form-tab:hover {
       color: #10B981;
+      background: #2d2d2d;
     }
+    .form-tab.active {
+      color: #10B981;
+      border-bottom: 3px solid #10B981;
+    }
+
+    .social-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    .social-btn.google:hover i { color: #db4437; }
+    .social-btn.facebook:hover i { color: #3b5998; }
+    .social-btn.twitter:hover i { color: #1da1f2; }
 
     /* Toast Notification */
     .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
       background: #10B981;
-      color: white;
+      color: #fff;
       padding: 12px 24px;
       border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.3s ease, transform 0.3s ease;
-      z-index: 1000;
     }
     .toast.show {
       opacity: 1;
@@ -118,26 +154,23 @@
 
     /* Back to Top Button */
     .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
       background: linear-gradient(90deg, #10B981, #059669);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
     }
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
+
+    /* Modal */
+    .modal-backdrop {
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+    }
+    .modal-content {
+      background: #1f1f1f;
+      color: #f3f4f6;
+      animation: slideIn 0.4s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
     }
 
     /* Animations */
@@ -148,57 +181,45 @@
     .animate-fade-in-up {
       animation: fadeInUp 0.8s ease-out forwards;
     }
-
-    /* Modal Animations */
-    .modal-backdrop {
-      backdrop-filter: blur(6px);
-    }
-    .modal-content {
-      animation: slideIn 0.4s ease-out;
-    }
-    @keyframes slideIn {
-      from { transform: translateY(-50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
   </style>
 </head>
 <body>
   <!-- Header -->
-  <header class="bg-white shadow-lg sticky top-0 z-50">
+  <header class="sticky top-0 z-50">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-12">
-        <h1 class="text-4xl font-bold text-green-600 tracking-tight">Fruits17</h1>
+        <h1 class="text-4xl font-bold text-green-500 tracking-tight">Fruits17</h1>
         <nav class="hidden md:flex space-x-8">
-          <a href="#" class="text-gray-700 font-medium active-nav nav-link" id="home-link">Home</a>
-          <a href="#" class="text-gray-700 font-medium nav-link" id="shop-link">Shop</a>
-          <a href="#" class="text-gray-700 font-medium nav-link">Shop Detail</a>
+          <a href="#" class="font-medium active-nav nav-link" id="home-link">Home</a>
+          <a href="#" class="font-medium nav-link" id="shop-link">Shop</a>
+          <a href="#" class="font-medium nav-link">Shop Detail</a>
           <div class="relative group">
-            <a href="#" class="text-gray-700 font-medium flex items-center nav-link">
+            <a href="#" class="font-medium flex items-center nav-link">
               Pages <i class="fas fa-chevron-down text-xs ml-2"></i>
             </a>
-            <div class="absolute hidden group-hover:block bg-white shadow-xl rounded-lg mt-2 w-56 z-10 animate-fade-in-up">
-              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">About Us</a>
-              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">Contact</a>
-              <a href="#" class="block px-4 py-3 text-gray-700 hover:bg-green-50 hover:text-green-600">FAQs</a>
+            <div class="absolute hidden group-hover:block bg-gray-800 shadow-xl rounded-lg mt-2 w-56 z-10 animate-fade-in-up">
+              <a href="#" class="block px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-green-500">About Us</a>
+              <a href="#" class="block px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-green-500">Contact</a>
+              <a href="#" class="block px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-green-500">FAQs</a>
             </div>
           </div>
-          <a href="#" class="text-gray-700 font-medium nav-link">Contact</a>
+          <a href="#" class="font-medium nav-link">Contact</a>
         </nav>
       </div>
       <div class="flex items-center space-x-6">
         <div class="relative hidden md:block">
-          <input type="text" placeholder="Search for fruits..." class="pl-12 pr-4 py-3 border rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all w-64" aria-label="Search products">
+          <input type="text" placeholder="Search for fruits..." class="pl-12 pr-4 py-3 bg-gray-800 border border-gray-700 rounded-full focus:outline-none focus:ring-2 focus:ring-green-500 text-gray-300 w-64" aria-label="Search products">
           <i class="fas fa-search absolute left-4 top-3 text-gray-400"></i>
         </div>
         <button class="relative p-2" onclick="openCart()" aria-label="View cart">
-          <i class="fas fa-shopping-cart text-gray-700 text-xl"></i>
+          <i class="fas fa-shopping-cart text-gray-300 text-xl"></i>
           <span id="cart-count" class="absolute -top-2 -right-2 bg-orange-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">0</span>
         </button>
         <button class="p-2" onclick="openSignInModal()" aria-label="Sign in">
-          <i class="fas fa-user text-gray-700 text-xl"></i>
+          <i class="fas fa-user text-gray-300 text-xl"></i>
         </button>
         <button class="md:hidden p-2" aria-label="Toggle menu">
-          <i class="fas fa-bars text-gray-700 text-xl"></i>
+          <i class="fas fa-bars text-gray-300 text-xl"></i>
         </button>
       </div>
     </div>
@@ -206,82 +227,56 @@
 
   <!-- Hero Section -->
   <section class="hero-bg h-[500px] flex items-center justify-center text-white relative">
-    <div class="absolute inset-0 bg-gradient-to-r from-green-600/50 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-green-800/50 to-transparent"></div>
     <div class="relative z-10 text-center max-w-4xl px-6">
       <h2 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in-up">Purely Organic, Freshly Picked</h2>
       <p class="text-xl md:text-2xl mb-8 animate-fade-in-up delay-100">From Our Farms to Your Table with Love</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up delay-200">
-        <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-semibold text-lg btn-hover">
-          Shop Now
-        </button>
-        <button class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-white hover:text-green-600 transition-all btn-hover">
-          Discover More
-        </button>
+        <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-semibold text-lg btn-hover">Shop Now</button>
+        <button class="bg-transparent border-2 border-white text-white px-10 py-4 rounded-full font-semibold text-lg hover:bg-green-500 hover:text-gray-900 transition-all btn-hover">Discover More</button>
       </div>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section class="py-16 bg-white">
+  <section class="py-16 bg-gray-900">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up">
-          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-shipping-fast text-green-600 text-3xl"></i>
+        <div class="feature-card p-8 rounded-xl text-center animate-fade-in-up">
+          <div class="bg-gray-700 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-shipping-fast text-green-500 text-3xl"></i>
           </div>
           <h3 class="text-2xl font-bold mb-3">Free Shipping</h3>
-          <p class="text-gray-600">On orders over ৳500</p>
+          <p class="text-gray-400">On orders over ৳500</p>
         </div>
-        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-100">
-          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-shield-alt text-green-600 text-3xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Secure Payment</h3>
-          <p class="text-gray-600">100% safe transactions</p>
-        </div>
-        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-200">
-          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-undo text-green-600 text-3xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">Hassle-Free Returns</h3>
-          <p class="text-gray-600">30-day return policy</p>
-        </div>
-        <div class="feature-card bg-green-50 p-8 rounded-xl text-center animate-fade-in-up delay-300">
-          <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <i class="fas fa-headset text-green-600 text-3xl"></i>
-          </div>
-          <h3 class="text-2xl font-bold mb-3">24/7 Support</h3>
-          <p class="text-gray-600">Always here to help</p>
-        </div>
+        <!-- Add other feature cards similarly -->
       </div>
     </div>
   </section>
 
   <!-- Products Section -->
-  <section class="py-16">
+  <section class="py-16 bg-gray-800">
     <div class="container mx-auto px-4">
       <div class="flex justify-between items-center mb-10">
-        <h2 class="text-4xl font-bold text-gray-800">Our Organic Fruits</h2>
+        <h2 class="text-4xl font-bold text-gray-100">Our Organic Fruits</h2>
         <div class="flex space-x-3">
           <button class="filter-btn px-6 py-3 bg-green-600 text-white rounded-full font-medium" data-category="all">All</button>
-          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="tropical">Tropical</button>
-          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="berries">Berries</button>
-          <button class="filter-btn px-6 py-3 bg-white text-gray-700 border border-gray-300 rounded-full hover:bg-green-50 font-medium" data-category="citrus">Citrus</button>
+          <button class="filter-btn px-6 py-3 bg-gray-700 text-gray-300 border border-gray-600 rounded-full hover:bg-green-600 hover:text-white font-medium" data-category="tropical">Tropical</button>
+          <button class="filter-btn px-6 py-3 bg-gray-700 text-gray-300 border border-gray-600 rounded-full hover:bg-green-600 hover:text-white font-medium" data-category="berries">Berries</button>
+          <button class="filter-btn px-6 py-3 bg-gray-700 text-gray-300 border border-gray-600 rounded-full hover:bg-green-600 hover:text-white font-medium" data-category="citrus">Citrus</button>
         </div>
       </div>
-
       <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        <!-- Product 1 - Banana -->
-        <div class="product-card bg-white rounded-xl overflow-hidden" data-category="tropical">
+        <div class="product-card rounded-xl overflow-hidden" data-category="tropical">
           <div class="relative">
             <img src="img/banana download.jpg" alt="Banana" class="w-full h-56 object-cover product-image">
             <span class="absolute top-3 right-3 bg-red-500 text-white text-sm px-3 py-1 rounded-full">-15%</span>
-            <button class="wishlist-btn absolute top-3 left-3 text-gray-500 hover:text-red-500" data-product="banana" aria-label="Add to wishlist">
+            <button class="wishlist-btn absolute top-3 left-3 text-gray-400 hover:text-red-500" data-product="banana" aria-label="Add to wishlist">
               <i class="far fa-heart"></i>
             </button>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-xl mb-2">Fresh Bananas</h3>
+            <h3 class="font-bold text-xl mb-2 text-gray-100">Fresh Bananas</h3>
             <div class="flex items-center mb-3">
               <div class="text-yellow-400 flex">
                 <i class="fas fa-star"></i>
@@ -290,132 +285,128 @@
                 <i class="fas fa-star"></i>
                 <i class="far fa-star"></i>
               </div>
-              <span class="text-gray-500 text-sm ml-2">(24)</span>
+              <span class="text-gray-400 text-sm ml-2">(24)</span>
             </div>
             <div class="flex justify-between items-center">
               <div>
-                <span class="text-green-600 font-bold text-lg">৳299</span>
+                <span class="text-green-500 font-bold text-lg">৳299</span>
                 <span class="text-gray-500 text-sm line-through ml-2">৳350</span>
               </div>
-              <button class="add-to-cart bg-green-600 hover:bg-green-700 text-white p-3 rounded-full" data-product="banana" aria-label="Add to cart">
+              <button class="add-to-cart bg-green-600 text-white p-3 rounded-full" data-product="banana" aria-label="Add to cart">
                 <i class="fas fa-shopping-cart"></i>
               </button>
             </div>
           </div>
         </div>
-        <!-- Add other products similarly with data-category attributes -->
-        <!-- Product 2 - Strawberry -->
-        <div class="product-card bg-white rounded-xl overflow-hidden" data-category="berries">
-          <div class="relative">
-            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Strawberry" class="w-full h-56 object-cover product-image">
-            <span class="absolute top-3 right-3 bg-red-500 text-white text-sm px-3 py-1 rounded-full">-10%</span>
-            <button class="wishlist-btn absolute top-3 left-3 text-gray-500 hover:text-red-500" data-product="strawberry" aria-label="Add to wishlist">
-              <i class="far fa-heart"></i>
-            </button>
-          </div>
-          <div class="p-6">
-            <h3 class="font-bold text-xl mb-2">Organic Strawberries</h3>
-            <div class="flex items-center mb-3">
-              <div class="text-yellow-400 flex">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-              </div>
-              <span class="text-gray-500 text-sm ml-2">(18)</span>
-            </div>
-            <div class="flex justify-between items-center">
-              <div>
-                <span class="text-green-600 font-bold text-lg">৳499</span>
-                <span class="text-gray-500 text-sm line-through ml-2">৳550</span>
-              </div>
-              <button class="add-to-cart bg-green-600 hover:bg-green-700 text-white p-3 rounded-full" data-product="strawberry" aria-label="Add to cart">
-                <i class="fas fa-shopping-cart"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Add remaining products (Mango, Apple, Watermelon, Orange) similarly -->
-      </div>
-
-      <div class="text-center mt-12">
-        <button class="bg-green-600 hover:bg-green-700 text-white px-10 py-4 rounded-full font-semibold btn-hover">View All Fruits</button>
+        <!-- Add other products similarly -->
       </div>
     </div>
   </section>
 
-  <!-- Newsletter Section -->
-  <section class="py-16 bg-gradient-to-r from-green-600 to-green-800 text-white">
-    <div class="container mx-auto px-4 text-center">
-      <h2 class="text-4xl font-bold mb-6 animate-fade-in-up">Join Our Fruitful Community</h2>
-      <p class="text-lg mb-8 max-w-2xl mx-auto animate-fade-in-up delay-100">Stay updated with exclusive offers and fresh arrivals!</p>
-      <form class="max-w-md mx-auto flex">
-        <input type="email" placeholder="Enter your email" class="flex-1 py-4 px-6 rounded-l-full focus:outline-none focus:ring-2 focus:ring-green-400 text-gray-800" aria-label="Email for newsletter" required>
-        <button type="submit" class="bg-yellow-500 hover:bg-yellow-600 text-gray-800 font-bold py-4 px-8 rounded-r-full btn-hover">Subscribe</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-16">
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div>
-          <h3 class="text-2xl font-bold mb-6 text-green-400">Fruits17</h3>
-          <p class="mb-6 text-gray-300">Delivering the freshest organic fruits straight to your door.</p>
-          <div class="flex space-x-6">
-            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Facebook"><i class="fab fa-facebook-f text-xl"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
-            <a href="#" class="text-white hover:text-green-400 social-icon" aria-label="Pinterest"><i class="fab fa-pinterest text-xl"></i></a>
-          </div>
-        </div>
-        <!-- Add other footer sections similarly -->
+  <!-- Sign In Modal -->
+  <div id="signInModal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 hidden modal-backdrop">
+    <div class="modal-content rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+      <div class="bg-gray-900 py-8 text-center">
+        <h1 class="text-3xl font-bold text-green-500">Fruits17</h1>
+        <p class="text-gray-400 mt-2">Fresh Organic Fruits</p>
       </div>
-      <div class="border-t border-gray-700 mt-12 pt-8 text-center">
-        <p class="text-gray-300">© 2025 Fruits17. All Rights Reserved. Crafted with <i class="fas fa-heart text-red-500"></i> by Redwan</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Cart Modal -->
-  <div id="cartModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden modal-backdrop">
-    <div class="bg-white rounded-2xl w-full max-w-5xl max-h-[90vh] overflow-y-auto modal-content">
       <div class="p-8">
-        <div class="flex justify-between items-center mb-8">
-          <h2 class="text-3xl font-bold text-gray-800">Your Shopping Cart</h2>
-          <button onclick="closeCart()" class="text-gray-500 hover:text-gray-700" aria-label="Close cart">
-            <i class="fas fa-times text-2xl"></i>
-          </button>
+        <!-- Toggle Tabs -->
+        <div class="flex mb-8 border-b border-gray-700">
+          <button id="signInTab" class="form-tab flex-1 py-4 text-center font-medium text-green-500 border-b-3 border-green-500 active">Sign In</button>
+          <button id="signUpTab" class="form-tab flex-1 py-4 text-center font-medium text-gray-400 hover:text-green-500">Sign Up</button>
         </div>
-        <div id="cart-items" class="space-y-6">
-          <!-- Cart items will be dynamically inserted here -->
-        </div>
-        <div class="mt-8">
-          <div class="flex items-center mb-6">
-            <input type="text" id="promo-code" placeholder="Enter promo code" class="flex-1 py-3 px-4 border rounded-l-full focus:outline-none focus:ring-2 focus:ring-green-500">
-            <button onclick="applyPromo()" class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-r-full font-medium">Apply</button>
+        <!-- Sign In Form -->
+        <form id="signInForm" class="space-y-6">
+          <div>
+            <label for="signInEmail" class="block text-gray-300 mb-2 font-medium">Email</label>
+            <input type="email" id="signInEmail" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Enter your email" required aria-label="Email">
           </div>
-          <div class="bg-green-50 p-6 rounded-xl">
-            <div class="flex justify-between mb-3">
-              <span class="font-medium">Subtotal:</span>
-              <span id="subtotal" class="font-medium">৳0</span>
+          <div>
+            <label for="signInPassword" class="block text-gray-300 mb-2 font-medium">Password</label>
+            <input type="password" id="signInPassword" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Enter your password" required aria-label="Password">
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input type="checkbox" id="remember" class="h-4 w-4 text-green-500 focus:ring-green-500 border-gray-600 rounded">
+              <label for="remember" class="ml-2 text-sm text-gray-300">Remember me</label>
             </div>
-            <div class="flex justify-between mb-3">
-              <span class="font-medium">Shipping:</span>
-              <span class="font-medium">৳99</span>
+            <a href="#" class="text-sm text-green-500 hover:text-green-400">Forgot password?</a>
+          </div>
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all btn-hover">Sign In</button>
+        </form>
+        <!-- Sign Up Form -->
+        <form id="signUpForm" class="space-y-6 hidden">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label for="firstName" class="block text-gray-300 mb-2 font-medium">First Name</label>
+              <input type="text" id="firstName" class="form-input w-full px-4 py-3 rounded-lg" placeholder="First name" required aria-label="First name">
             </div>
-            <div class="flex justify-between mb-6 font-bold text-lg">
-              <span>Total:</span>
-              <span id="total" class="text-green-600">৳0</span>
+            <div>
+              <label for="lastName" class="block text-gray-300 mb-2 font-medium">Last Name</label>
+              <input type="text" id="lastName" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Last name" required aria-label="Last name">
             </div>
-            <button onclick="proceedToCheckout()" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-lg font-semibold btn-hover">Proceed to Checkout</button>
+          </div>
+          <div>
+            <label for="signUpEmail" class="block text-gray-300 mb-2 font-medium">Email</label>
+            <input type="email" id="signUpEmail" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Enter your email" required aria-label="Email">
+          </div>
+          <div>
+            <label for="signUpPassword" class="block text-gray-300 mb-2 font-medium">Password</label>
+            <input type="password" id="signUpPassword" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Create a password" required aria-label="Password">
+          </div>
+          <div>
+            <label for="confirmPassword" class="block text-gray-300 mb-2 font-medium">Confirm Password</label>
+            <input type="password" id="confirmPassword" class="form-input w-full px-4 py-3 rounded-lg" placeholder="Confirm your password" required aria-label="Confirm password">
+          </div>
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 transition-all btn-hover">Create Account</button>
+        </form>
+        <div class="mt-8">
+          <div class="relative">
+            <div class="absolute inset-0 flex items-center">
+              <div class="w-full border-t border-gray-700"></div>
+            </div>
+            <div class="relative flex justify-center text-sm">
+              <span class="px-2 bg-gray-900 text-gray-400">Or continue with</span>
+            </div>
+          </div>
+          <div class="mt-6 grid grid-cols-3 gap-3">
+            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-600 rounded-md text-gray-300 bg-gray-800 hover:bg-gray-700 transition-all google">
+              <i class="fab fa-google text-red-500"></i>
+            </button>
+            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-600 rounded-md text-gray-300 bg-gray-800 hover:bg-gray-700 transition-all facebook">
+              <i class="fab fa-facebook text-blue-600"></i>
+            </button>
+            <button class="social-btn flex justify-center items-center py-2 px-4 border border-gray-600 rounded-md text-gray-300 bg-gray-800 hover:bg-gray-700 transition-all twitter">
+              <i class="fab fa-twitter text-blue-400"></i>
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div>
+          <h3 class="text-2xl font-bold mb-6 text-green-500">Fruits17</h3>
+          <p class="mb-6 text-gray-400">Delivering the freshest organic fruits straight to your door.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-300 hover:text-green-500 social-icon" aria-label="Facebook"><i class="fab fa-facebook-f text-xl"></i></a>
+            <a href="#" class="text-gray-300 hover:text-green-500 social-icon" aria-label="Twitter"><i class="fab fa-twitter text-xl"></i></a>
+            <a href="#" class="text-gray-300 hover:text-green-500 social-icon" aria-label="Instagram"><i class="fab fa-instagram text-xl"></i></a>
+            <a href="#" class="text-gray-300 hover:text-green-500 social-icon" aria-label="Pinterest"><i class="fab fa-pinterest text-xl"></i></a>
+          </div>
+        </div>
+        <!-- Add other footer sections -->
+      </div>
+      <div class="border-t border-gray-700 mt-12 pt-8 text-center">
+        <p class="text-gray-400">© 2025 Fruits17. All Rights Reserved. Crafted with <i class="fas fa-heart text-red-500"></i> by Redwan</p>
+      </div>
+    </div>
+  </footer>
 
   <!-- Back to Top Button -->
   <button id="back-to-top" class="back-to-top" aria-label="Back to top">
@@ -426,7 +417,7 @@
   <div id="toast" class="toast"></div>
 
   <script>
-    // Initialize cart and wishlist
+    // Cart and wishlist initialization
     let cartItems = JSON.parse(localStorage.getItem('cartItems')) || {};
     let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
@@ -434,10 +425,7 @@
     const products = [
       { id: 'banana', name: 'Fresh Bananas', price: 299, originalPrice: 350, discount: 15, category: 'tropical', image: 'img/banana download.jpg', rating: 4 },
       { id: 'strawberry', name: 'Organic Strawberries', price: 499, originalPrice: 550, discount: 10, category: 'berries', image: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80', rating: 5 },
-      { id: 'mango', name: 'Fresh Mangoes', price: 349, category: 'tropical', image: 'img/mango download.jpg', rating: 4 },
-      { id: 'apple', name: 'Fresh Apples', price: 299, category: 'tropical', image: 'img/appple download.jpg', rating: 5 },
-      { id: 'watermelon', name: 'Fresh Watermelon', price: 399, category: 'tropical', image: 'img/watermelon download.jpg', rating: 4 },
-      { id: 'orange', name: 'Fresh Oranges', price: 249, category: 'citrus', image: 'img/orange download.jpg', rating: 5 }
+      // Add other products
     ];
 
     // Toast notification
@@ -461,6 +449,43 @@
       showToast(`${product.name} added to cart!`);
     }
 
+    function updateCartUI() {
+      const cartItemsContainer = document.getElementById('cart-items') || document.createElement('div');
+      cartItemsContainer.innerHTML = '';
+      let subtotal = 0;
+      let itemCount = 0;
+
+      for (const id in cartItems) {
+        const item = cartItems[id];
+        subtotal += item.price * item.qty;
+        itemCount += item.qty;
+        cartItemsContainer.innerHTML += `
+          <div class="flex items-center justify-between border-b border-gray-700 py-4">
+            <div class="flex items-center">
+              <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg mr-4">
+              <span class="font-medium text-gray-100">${item.name}</span>
+            </div>
+            <div class="flex items-center space-x-4">
+              <span class="text-gray-100">৳${item.price}</span>
+              <div class="flex items-center">
+                <button onclick="updateQuantity('${id}', -1)" class="quantity-btn w-10 h-10 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600">-</button>
+                <span id="${id}-qty" class="w-12 text-center text-gray-100">${item.qty}</span>
+                <button onclick="updateQuantity('${id}', 1)" class="quantity-btn w-10 h-10 rounded-lg bg-gray-700 text-gray-300 hover:bg-gray-600">+</button>
+              </div>
+              <span id="${id}-total" class="font-medium text-gray-100">৳${item.price * item.qty}</span>
+              <button onclick="removeItem('${id}')" class="text-red-500 hover:text-red-400" aria-label="Remove item">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+        `;
+      }
+
+      document.getElementById('subtotal')?.textContent = `৳${subtotal}`;
+      document.getElementById('total')?.textContent = `৳${subtotal + 99}`;
+      document.getElementById('cart-count').textContent = itemCount;
+    }
+
     function updateQuantity(productId, change) {
       if (cartItems[productId]) {
         cartItems[productId].qty = Math.max(1, cartItems[productId].qty + change);
@@ -479,85 +504,67 @@
       }
     }
 
-    function updateCartUI() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      cartItemsContainer.innerHTML = '';
-      let subtotal = 0;
-      let itemCount = 0;
+    // Sign In Modal
+    function openSignInModal() {
+      document.getElementById('signInModal').classList.remove('hidden');
+    }
 
-      for (const id in cartItems) {
-        const item = cartItems[id];
-        subtotal += item.price * item.qty;
-        itemCount += item.qty;
+    function closeSignInModal() {
+      document.getElementById('signInModal').classList.add('hidden');
+    }
 
-        cartItemsContainer.innerHTML += `
-          <div class="flex items-center justify-between border-b py-4">
-            <div class="flex items-center">
-              <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-lg mr-4">
-              <span class="font-medium">${item.name}</span>
-            </div>
-            <div class="flex items-center space-x-4">
-              <span>৳${item.price}</span>
-              <div class="flex items-center">
-                <button onclick="updateQuantity('${id}', -1)" class="quantity-btn w-10 h-10 rounded-lg">-</button>
-                <span id="${id}-qty" class="w-12 text-center">${item.qty}</span>
-                <button onclick="updateQuantity('${id}', 1)" class="quantity-btn w-10 h-10 rounded-lg">+</button>
-              </div>
-              <span id="${id}-total" class="font-medium">৳${item.price * item.qty}</span>
-              <button onclick="removeItem('${id}')" class="text-red-500 hover:text-red-700" aria-label="Remove item">
-                <i class="fas fa-trash"></i>
-              </button>
-            </div>
-          </div>
-        `;
+    // Tab switching
+    const signInTab = document.getElementById('signInTab');
+    const signUpTab = document.getElementById('signUpTab');
+    const signInForm = document.getElementById('signInForm');
+    const signUpForm = document.getElementById('signUpForm');
+
+    signInTab.addEventListener('click', () => {
+      signInTab.classList.add('active');
+      signUpTab.classList.remove('active');
+      signInForm.classList.remove('hidden');
+      signUpForm.classList.add('hidden');
+    });
+
+    signUpTab.addEventListener('click', () => {
+      signUpTab.classList.add('active');
+      signInTab.classList.remove('active');
+      signUpForm.classList.remove('hidden');
+      signInForm.classList.add('hidden');
+    });
+
+    // Form submissions
+    signInForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('signInEmail').value;
+      const password = document.getElementById('signInPassword').value;
+      if (!email || !password) {
+        showToast('Please fill in all fields');
+        return;
       }
+      showToast('Sign In successful! Welcome to Fruits17.');
+      closeSignInModal();
+    });
 
-      document.getElementById('subtotal').textContent = `৳${subtotal}`;
-      document.getElementById('total').textContent = `৳${subtotal + 99}`;
-      document.getElementById('cart-count').textContent = itemCount;
-    }
+    signUpForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const email = document.getElementById('signUpEmail').value;
+      const password = document.getElementById('signUpPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
 
-    function applyPromo() {
-      const promoCode = document.getElementById('promo-code').value;
-      if (promoCode === 'FRUIT10') {
-        showToast('Promo code applied! 10% discount added.');
-        // Implement discount logic here
-      } else {
-        showToast('Invalid promo code');
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        showToast('Please fill in all fields');
+        return;
       }
-    }
-
-    // Wishlist functions
-    function toggleWishlist(productId) {
-      const index = wishlist.indexOf(productId);
-      const btn = document.querySelector(`.wishlist-btn[data-product="${productId}"] i`);
-      if (index === -1) {
-        wishlist.push(productId);
-        btn.classList.remove('far');
-        btn.classList.add('fas', 'text-red-500');
-        showToast(`${products.find(p => p.id === productId).name} added to wishlist`);
-      } else {
-        wishlist.splice(index, 1);
-        btn.classList.add('far');
-        btn.classList.remove('fas', 'text-red-500');
-        showToast(`${products.find(p => p.id === productId).name} removed from wishlist`);
+      if (password !== confirmPassword) {
+        showToast('Passwords do not match!');
+        return;
       }
-      localStorage.setItem('wishlist', JSON.stringify(wishlist));
-    }
-
-    // Product filter
-    function filterProducts(category) {
-      const productGrid = document.getElementById('product-grid');
-      const productCards = productGrid.querySelectorAll('.product-card');
-      productCards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.classList.remove('hidden');
-          card.style.animation = 'fadeInUp 0.5s ease-out';
-        } else {
-          card.classList.add('hidden');
-        }
-      });
-    }
+      showToast('Account created successfully! Please sign in.');
+      signInTab.click();
+    });
 
     // Back to top
     window.addEventListener('scroll', () => {
@@ -594,6 +601,36 @@
         });
       });
     });
+
+    function filterProducts(category) {
+      const productGrid = document.getElementById('product-grid');
+      const productCards = productGrid.querySelectorAll('.product-card');
+      productCards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.classList.remove('hidden');
+          card.style.animation = 'fadeInUp 0.5s ease-out';
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function toggleWishlist(productId) {
+      const index = wishlist.indexOf(productId);
+      const btn = document.querySelector(`.wishlist-btn[data-product="${productId}"] i`);
+      if (index === -1) {
+        wishlist.push(productId);
+        btn.classList.remove('far');
+        btn.classList.add('fas', 'text-red-500');
+        showToast(`${products.find(p => p.id === productId).name} added to wishlist`);
+      } else {
+        wishlist.splice(index, 1);
+        btn.classList.add('far');
+        btn.classList.remove('fas', 'text-red-500');
+        showToast(`${products.find(p => p.id === productId).name} removed from wishlist`);
+      }
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
   </script>
 </body>
 </html>
